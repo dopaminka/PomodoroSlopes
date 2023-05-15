@@ -41,7 +41,35 @@
 }
 
 .timerFinished {
-            background-color: #000000;
+            background-color: #000000}
+			
+			
+			
+.buttonsContainer {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .timerButton {
+            width: 56.6px;
+            height: 56.6px;
+            border-radius: 50%;
+            background-color: #F04C23;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.3s;
+        }
+
+        .timerButton:hover {
+            background-color: #C03D1F;
+        }
     </style>
 </head>
 <body>
@@ -71,6 +99,18 @@
         <div class="timerCircle" data-time="600">10:00</div>
         <div class="timerCircle" data-time="1200">20:00</div>
     </div>
+	
+	<div class="buttonsContainer">
+    <button id="btn1" class="timerButton">Complete / Reset</button>
+    <button id="btn2" class="timerButton">Complete / Reset</button>
+    <button id="btn3" class="timerButton">Complete / Reset</button>
+    <button id="btn4" class="timerButton">Complete / Reset</button>
+    <button id="btn5" class="timerButton">Complete / Reset</button>
+    <button id="btn6" class="timerButton">Complete / Reset</button>
+    <button id="btn7" class="timerButton">Complete / Reset</button>
+    <button id="btn8" class="timerButton">Complete / Reset</button>
+</div>
+
 
     <!-- The timerEndSound plays when the timer reaches 0 -->
 <audio id="timerEndSound" src="alm_BicycleBell.ogg" preload="auto"></audio>
@@ -89,52 +129,83 @@
             this.initialTime = this.remainingTime;
             this.circle.addEventListener('click', () => this.handleClick());
             this.updateDisplay();
+			        this.completed = false;
+
         }
 
-        handleClick() {
-            if (this.countdown) {
-                this.paused = !this.paused;
-                if (this.paused) {
-                    clearInterval(this.countdown);
-                    this.countdown = null;
-                    this.pausedTime = this.remainingTime;
-                    document.getElementById("whiteNoise").pause();
-                } else {
-                    this.remainingTime = this.pausedTime;
-                    this.startCountdown();
-                    document.getElementById("whiteNoise").play();
-                }
-            } else {
-                this.startCountdown();
-                document.getElementById("whiteNoise").play();
-            }
+     complete() {
+        if (this.countdown) {
+            clearInterval(this.countdown);
+            this.countdown = null;
+            document.getElementById("whiteNoise").pause();
         }
+        this.remainingTime = 0;
+        this.updateDisplay();
+        this.circle.classList.add('timerFinished');
+        this.paused = false; // Reset the paused state
+        this.completed = true; // Set completed to true
+    }
 
-        startCountdown() {
-            this.updateDisplay();
+    reset() {
+        if (this.countdown) {
+            clearInterval(this.countdown);
+            this.countdown = null;
+            document.getElementById("whiteNoise").pause();
+        }
+        this.remainingTime = this.initialTime;
+        this.paused = false; // Reset the paused state
+        this.updateDisplay();
+        this.completed = false; // Set completed to false
+        this.circle.classList.remove('timerFinished'); // Remove the timerFinished class
+    }
 
-            this.countdown = setInterval(() => {
-                this.remainingTime--;
+    handleClick() {
+        this.circle.classList.remove('timerFinished');
+        if (this.countdown && !this.paused) {
+            this.paused = true;
+            clearInterval(this.countdown);
+            this.countdown = null;
+            this.pausedTime = this.remainingTime;
+            document.getElementById("whiteNoise").pause();
+        } else if (this.countdown && this.paused) {
+            this.paused = false;
+            this.startCountdown();
+            document.getElementById("whiteNoise").play();
+        } else {
+            this.startCountdown();
+            document.getElementById("whiteNoise").play();
+        }
+    }
 
-                if (this.remainingTime < 0) {
-                    clearInterval(this.countdown);
-                    this.countdown = null;
-                    this.circle.classList.add('timerFinished');
+  
+  startCountdown() {
+    if (this.countdown) return;  // Return early if a countdown is already running
 
-                    const whiteNoise = document.getElementById("whiteNoise");
-                    whiteNoise.pause();
-                    whiteNoise.currentTime = 0; // Reset the white noise for the next play
+    this.updateDisplay();
 
-                    setTimeout(function() {
-                        document.getElementById("timerEndSound").play();
-                    }, 100); // Delay the end sound by 100ms
+    this.countdown = setInterval(() => {
+        this.remainingTime--;
+
+        if (this.remainingTime < 0) {
+            clearInterval(this.countdown);
+            this.countdown = null;
+            this.circle.classList.add('timerFinished');
+
+            const whiteNoise = document.getElementById("whiteNoise");
+            whiteNoise.pause();
+            whiteNoise.currentTime = 0; // Reset the white noise for the next play
+
+            setTimeout(function() {
+                document.getElementById("timerEndSound").play();
+            }, 100); // Delay the end sound by 100ms
                     
-                    return;
-                }
-
-                this.updateDisplay();
-            }, 1000);
+            return;
         }
+
+        this.updateDisplay();
+    }, 1000);
+}
+
 
         updateDisplay() {
             const minutes = Math.floor(this.remainingTime / 60);
@@ -150,13 +221,26 @@
         }
     }
 
+    function changeTitle() {
+        var title = document.getElementById('title').value;
+        document.title = title;
+    }
+
     const timerCircles = document.querySelectorAll('.timerCircle');
-    timerCircles.forEach(circle => new Timer(circle));
-	
-	   function changeTitle() {
-            var title = document.getElementById('title').value;
-            document.title = title;
+    const timers = Array.from(timerCircles).map(circle => new Timer(circle));
+
+   
+const timerButtons = document.querySelectorAll('.timerButton');
+timerButtons.forEach((button, index) => {
+    button.addEventListener('click', () => {
+        if (!timers[index].completed) {
+            timers[index].complete();
+        } else {
+            timers[index].reset();
         }
+    });
+});
 </script>
+
 </body>
 </html>
