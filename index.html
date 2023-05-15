@@ -45,11 +45,19 @@
     </style>
 </head>
 <body>
-     <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh;">
+ <div style="display: flex; flex-direction: column; ">
+        <!-- Add your title field here -->
+        <div style="text-align: center">
+            <label for="title">Title / Wish:</label><br>
+            <input type="text" id="title" onchange="changeTitle()" style="width: 350px"/>
+        </div>
+
+
+     <div style="display: flex; flex-direction: column; Margin-top:20px">
         <!-- Add your text field for notes here -->
         <div style="text-align: center; margin-bottom: 20px;">
-            <label for="notes">Notes / Wish:</label><br>
-            <textarea id="notes" rows="8" cols="50"></textarea>
+            <label for="notes" style="display: block; margin-bottom: 5px;">Notes / Wish:</label>
+            <textarea id="notes" rows="16" cols="50"></textarea>
         </div>
     <!-- Here are the timer circles, each with a data-time attribute specifying its duration in seconds -->
     <div class="timerContainer">
@@ -144,6 +152,11 @@
 
     const timerCircles = document.querySelectorAll('.timerCircle');
     timerCircles.forEach(circle => new Timer(circle));
+	
+	   function changeTitle() {
+            var title = document.getElementById('title').value;
+            document.title = title;
+        }
 </script>
 </body>
 </html>
