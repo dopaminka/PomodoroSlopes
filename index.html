@@ -56,7 +56,7 @@
             width: 56.6px;
             height: 56.6px;
             border-radius: 50%;
-            background-color: #F04C23;
+            background-color: #d98773;
             color: white;
             display: flex;
             justify-content: center;
@@ -119,44 +119,18 @@
 <audio id="whiteNoise" src="bgm_FastTicking.ogg" preload="auto" loop></audio>
 
 <script>
-    class Timer {
-        constructor(circle) {
-            this.circle = circle;
-            this.countdown = null;
-            this.paused = false;
-            this.pausedTime = 0;
-            this.remainingTime = parseInt(circle.dataset.time);
-            this.initialTime = this.remainingTime;
-            this.circle.addEventListener('click', () => this.handleClick());
-            this.updateDisplay();
-			        this.completed = false;
-
-        }
-
-     complete() {
-        if (this.countdown) {
-            clearInterval(this.countdown);
-            this.countdown = null;
-            document.getElementById("whiteNoise").pause();
-        }
-        this.remainingTime = 0;
+   class Timer {
+    constructor(circle) {
+        this.circle = circle;
+        this.countdown = null;
+        this.paused = false;
+        this.pausedTime = 0;
+        this.remainingTime = parseInt(circle.dataset.time);
+        this.initialTime = this.remainingTime;
+        this.startTime = null; // Start time of the timer
+        this.circle.addEventListener('click', () => this.handleClick());
         this.updateDisplay();
-        this.circle.classList.add('timerFinished');
-        this.paused = false; // Reset the paused state
-        this.completed = true; // Set completed to true
-    }
-
-    reset() {
-        if (this.countdown) {
-            clearInterval(this.countdown);
-            this.countdown = null;
-            document.getElementById("whiteNoise").pause();
-        }
-        this.remainingTime = this.initialTime;
-        this.paused = false; // Reset the paused state
-        this.updateDisplay();
-        this.completed = false; // Set completed to false
-        this.circle.classList.remove('timerFinished'); // Remove the timerFinished class
+        this.completed = false;
     }
 
     handleClick() {
@@ -165,10 +139,11 @@
             this.paused = true;
             clearInterval(this.countdown);
             this.countdown = null;
-            this.pausedTime = this.remainingTime;
             document.getElementById("whiteNoise").pause();
-        } else if (this.countdown && this.paused) {
+            this.pausedTime = this.remainingTime;
+        } else if (this.paused) {
             this.paused = false;
+            this.remainingTime = this.pausedTime;
             this.startCountdown();
             document.getElementById("whiteNoise").play();
         } else {
@@ -177,59 +152,75 @@
         }
     }
 
-  
-  startCountdown() {
-    if (this.countdown) return;  // Return early if a countdown is already running
+    startCountdown() {
+        if (this.countdown) return; 
 
-    this.updateDisplay();
+        this.startTime = Date.now() - (this.initialTime - this.remainingTime) * 1000;
+        this.countdown = setInterval(() => {
+            this.remainingTime = this.initialTime - Math.floor((Date.now() - this.startTime) / 1000);
 
-    this.countdown = setInterval(() => {
-        this.remainingTime--;
+            if (this.remainingTime <= 0) {
+                this.complete();
+                return;
+            }
 
-        if (this.remainingTime < 0) {
-            clearInterval(this.countdown);
-            this.countdown = null;
-            this.circle.classList.add('timerFinished');
-
-            const whiteNoise = document.getElementById("whiteNoise");
-            whiteNoise.pause();
-            whiteNoise.currentTime = 0; // Reset the white noise for the next play
-
-            setTimeout(function() {
-                document.getElementById("timerEndSound").play();
-            }, 100); // Delay the end sound by 100ms
-                    
-            return;
-        }
+            this.updateDisplay();
+        }, 1000);
 
         this.updateDisplay();
-    }, 1000);
+    }
+
+   complete() {
+    if (this.countdown) {
+        clearInterval(this.countdown);
+        this.countdown = null;
+        document.getElementById("whiteNoise").pause();
+    }
+    this.remainingTime = 0;
+    this.updateDisplay();
+    this.circle.classList.add('timerFinished');
+    this.paused = false;
+    this.completed = true;
+    
+    // Add these lines to play the sound
+    setTimeout(function() {
+        document.getElementById("timerEndSound").play();
+    }, 100);
 }
 
-
-        updateDisplay() {
-            const minutes = Math.floor(this.remainingTime / 60);
-            const remainderSeconds = this.remainingTime % 60;
-            const display = `${minutes}:${remainderSeconds < 10 ? '0' : ''}${remainderSeconds}`;
-            this.circle.textContent = display;
-
-            // calculate the percentage of remaining time to initial time
-            const percentage = this.remainingTime / this.initialTime;
-            // interpolate the color from red to black based on the remaining time
-            const colorValue = Math.floor(percentage * 255);
-            this.circle.style.backgroundColor = `rgb(${colorValue}, 0, 0)`;
+    reset() {
+        if (this.countdown) {
+            clearInterval(this.countdown);
+            this.countdown = null;
+            document.getElementById("whiteNoise").pause();
         }
+        this.remainingTime = this.initialTime;
+        this.paused = false;
+        this.updateDisplay();
+        this.completed = false;
+        this.circle.classList.remove('timerFinished');
     }
 
-    function changeTitle() {
-        var title = document.getElementById('title').value;
-        document.title = title;
+    updateDisplay() {
+        const minutes = Math.floor(this.remainingTime / 60);
+        const remainderSeconds = this.remainingTime % 60;
+        const display = `${minutes}:${remainderSeconds < 10 ? '0' : ''}${remainderSeconds}`;
+        this.circle.textContent = display;
+
+        const percentage = this.remainingTime / this.initialTime;
+        const colorValue = Math.floor(percentage * 255);
+        this.circle.style.backgroundColor = `rgb(${colorValue}, 0, 0)`;
     }
+}
 
-    const timerCircles = document.querySelectorAll('.timerCircle');
-    const timers = Array.from(timerCircles).map(circle => new Timer(circle));
+function changeTitle() {
+    var title = document.getElementById('title').value;
+    document.title = title;
+}
 
-   
+const timerCircles = document.querySelectorAll('.timerCircle');
+const timers = Array.from(timerCircles).map(circle => new Timer(circle));
+
 const timerButtons = document.querySelectorAll('.timerButton');
 timerButtons.forEach((button, index) => {
     button.addEventListener('click', () => {
@@ -240,6 +231,7 @@ timerButtons.forEach((button, index) => {
         }
     });
 });
+
 </script>
 
 </body>
