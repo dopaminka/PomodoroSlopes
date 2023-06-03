@@ -290,12 +290,15 @@ document.getElementById('changeSound').addEventListener('click', function() {
     var whiteNoise = document.getElementById('whiteNoise');
 
     // change the source to a different audio file
-    whiteNoise.src = sounds[currentSound]; 
+    whiteNoise.src = sounds[currentSound];
+
+    // call load() to ensure the new audio file is loaded
+    whiteNoise.load();
 
     // cycle to the next sound
     currentSound = (currentSound + 1) % sounds.length;
-	
-	  // Start playing the new sound
+    
+    // Start playing the new sound
     whiteNoise.play();
 });
 
