@@ -169,6 +169,18 @@ textarea {
 <audio id="whiteNoise" src="bgm_FastTicking.ogg" preload="auto" loop></audio>
 
 <script>
+
+window.onload = function() {
+    var timerEndSound = document.getElementById('timerEndSound');
+    var whiteNoise = document.getElementById('whiteNoise');
+
+    timerEndSound.play();
+    timerEndSound.pause();
+
+    whiteNoise.play();
+    whiteNoise.pause();
+}
+
    class Timer {
     constructor(circle) {
         this.circle = circle;
