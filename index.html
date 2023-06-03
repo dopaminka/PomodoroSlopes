@@ -37,8 +37,8 @@ body {
 
         /* The timerCircle elements are the clickable timer buttons */
     .timerCircle{
-            width: 10vh;
-            height: 10vh;
+            width: 8vh;
+            height: 8vh;
             border-radius: 50%;
             background-color: #F04C23;
             color: white;
@@ -75,9 +75,17 @@ body {
 			margin-bottom: 2vh;
         }
 
+        .buttonsContainer3 {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1vw;
+			margin-bottom: 1vh;
+        }
+
 .timerButton {
-            width: 10vh;
-            height: 10vh;
+            width: 8vh;
+            height: 6vh;
             border-radius: 50%;
             background-color: #d98773;
             color: white;
@@ -94,6 +102,12 @@ body {
             background-color: #C03D1F;
         }
 		
+        input[type="text"],
+textarea {
+    font-size: 16px; /* or larger */
+}
+
+
     </style>
 </head>
 <body>
@@ -121,11 +135,11 @@ body {
     </div>
 	
 	<div class="buttonsContainer1">
-		<button id="btn1" class="timerButton">✔ / Rst. 001</button>
-		<button id="btn2" class="timerButton">✔ / Rst. 003</button>
-		<button id="btn3" class="timerButton">✔ / Rst. 006</button>
-		<button id="btn4" class="timerButton">✔ / Rst. 010</button>
-		<button id="btn5" class="timerButton">✔ / Rst. 030</button>
+		<button id="btn1" class="timerButton">✔ / Rst.</button>
+		<button id="btn2" class="timerButton">✔ / Rst.</button>
+		<button id="btn3" class="timerButton">✔ / Rst.</button>
+		<button id="btn4" class="timerButton">✔ / Rst.</button>
+		<button id="btn5" class="timerButton">✔ / Rst.</button>
 	</div>
 	
 	<div class="timerContainer2">
@@ -137,14 +151,16 @@ body {
     </div>
 	
 	<div class="buttonsContainer2">
-     <button id="btn6" class="timerButton">✔ / Rst. 1</button>
-     <button id="btn7" class="timerButton">✔ / Rst. 3</button>
-     <button id="btn8" class="timerButton">✔ / Rst. 6</button>
-	 <button id="btn9" class="timerButton">✔ / Rst. 10</button>
-	 <button id="btn10" class="timerButton">✔ / Rst. 20</button>
+     <button id="btn6" class="timerButton">✔ / Rst.</button>
+     <button id="btn7" class="timerButton">✔ / Rst.</button>
+     <button id="btn8" class="timerButton">✔ / Rst.</button>
+	 <button id="btn9" class="timerButton">✔ / Rst.</button>
+	 <button id="btn10" class="timerButton">✔ / Rst.</button>
 	</div>
-<button id="changeSound" class="timerButton">Change Sound</button>
 
+    <div class="buttonsContainer3">
+<button id="changeSound" class="timerButton">Change Sound</button>
+</div>
 
     <!-- The timerEndSound plays when the timer reaches 0 -->
 <audio id="timerEndSound" src="rimshot.mp3" preload="auto"></audio>
