@@ -1,67 +1,90 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Pomodoro Timer</title>
     <style>
         /* The following CSS styles the page to be a vertically and horizontally centered flex container */
-        body {
+body {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
+		   max-width: 800px; /* Adjust this to suit your needs */
+    margin: auto;
+  
         }
 
         /* The timerContainer holds the individual timer circles */
-        .timerContainer {
+.timerContainer1 {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 20px;
-            margin-bottom: 30px;
+            gap: 1vw;
+			margin-bottom: 1vh;
+
+        }
+.timerContainer2 {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1vw;
+            margin-bottom: 1vh;
         }
 
         /* The timerCircle elements are the clickable timer buttons */
-        .timerCircle{
-            width: 56.6px;
-            height: 56.6px;
+    .timerCircle{
+            width: 10vh;
+            height: 10vh;
             border-radius: 50%;
             background-color: #F04C23;
             color: white;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 12px;
+            font-size: 2vh;
             cursor: pointer;
             user-select: none;
         }
+
 		.timerCircleDark {
     background-color: #C03D1F;
-}
+    }
 
-.timerFinished {
-            background-color: #000000}
+    .timerFinished {
+            background-color: #000000
+        }
 			
 			
 			
-.buttonsContainer {
+.buttonsContainer1 {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 1vw;
+			margin-bottom: 2vh;
+        }
+.buttonsContainer2 {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1vw;
+			margin-bottom: 2vh;
         }
 
-        .timerButton {
-            width: 56.6px;
-            height: 56.6px;
+.timerButton {
+            width: 10vh;
+            height: 10vh;
             border-radius: 50%;
             background-color: #d98773;
             color: white;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 12px;
+            font-size: 2vh;
             cursor: pointer;
             user-select: none;
             transition: background-color 0.3s;
@@ -70,6 +93,7 @@
         .timerButton:hover {
             background-color: #C03D1F;
         }
+		
     </style>
 </head>
 <body>
@@ -81,38 +105,44 @@
         </div>
 
 
-     <div style="display: flex; flex-direction: column; Margin-top:20px">
+     <div style="display: flex; flex-direction: column; Margin-top:2vw">
         <!-- Add your text field for notes here -->
-        <div style="text-align: center; margin-bottom: 20px;">
+        <div style="text-align: center; margin-bottom: 2vw;">
             <label for="notes" style="display: block; margin-bottom: 5px;">Notes / Wish:</label>
             <textarea id="notes" rows="16" cols="50"></textarea>
         </div>
     <!-- Here are the timer circles, each with a data-time attribute specifying its duration in seconds -->
-    <div class="timerContainer">
-	        <div class="timerCircle" data-time="1">0:01</div>
-			   <div class="timerCircle" data-time="3">0:03</div>
-			   	        <div class="timerCircle" data-time="6">0:06</div>
-	        <div class="timerCircle" data-time="10">0:10</div>
+    <div class="timerContainer1">
+	    <div class="timerCircle" data-time="1">0:01</div>
+		<div class="timerCircle" data-time="3">0:03</div>
+		<div class="timerCircle" data-time="6">0:06</div>
+	    <div class="timerCircle" data-time="10">0:10</div>
         <div class="timerCircle" data-time="30">0:30</div>
-        <div class="timerCircle" data-time="60">1:00</div>
+    </div>
+	
+	<div class="buttonsContainer1">
+		<button id="btn1" class="timerButton">✔ / Rst. 001</button>
+		<button id="btn2" class="timerButton">✔ / Rst. 003</button>
+		<button id="btn3" class="timerButton">✔ / Rst. 006</button>
+		<button id="btn4" class="timerButton">✔ / Rst. 010</button>
+		<button id="btn5" class="timerButton">✔ / Rst. 030</button>
+	</div>
+	
+	<div class="timerContainer2">
+	    <div class="timerCircle" data-time="60">1:00</div>
         <div class="timerCircle" data-time="180">3:00</div>
         <div class="timerCircle" data-time="360">6:00</div>
         <div class="timerCircle" data-time="600">10:00</div>
         <div class="timerCircle" data-time="1200">20:00</div>
     </div>
 	
-	<div class="buttonsContainer">
-    <button id="btn1" class="timerButton">Complete / Reset</button>
-    <button id="btn2" class="timerButton">Complete / Reset</button>
-    <button id="btn3" class="timerButton">Complete / Reset</button>
-    <button id="btn4" class="timerButton">Complete / Reset</button>
-    <button id="btn5" class="timerButton">Complete / Reset</button>
-    <button id="btn6" class="timerButton">Complete / Reset</button>
-    <button id="btn7" class="timerButton">Complete / Reset</button>
-    <button id="btn8" class="timerButton">Complete / Reset</button>
-	  <button id="btn9" class="timerButton">Complete / Reset</button>
-	  	  <button id="btn10" class="timerButton">Complete / Reset</button>
-</div>
+	<div class="buttonsContainer2">
+     <button id="btn6" class="timerButton">✔ / Rst. 1</button>
+     <button id="btn7" class="timerButton">✔ / Rst. 3</button>
+     <button id="btn8" class="timerButton">✔ / Rst. 6</button>
+	 <button id="btn9" class="timerButton">✔ / Rst. 10</button>
+	 <button id="btn10" class="timerButton">✔ / Rst. 20</button>
+	</div>
 <button id="changeSound" class="timerButton">Change Sound</button>
 
 
