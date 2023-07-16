@@ -98,6 +98,21 @@ body {
             user-select: none;
             transition: background-color 0.3s;
         }
+.timerButton2 {
+            width: 8vh;
+            height: 4vh;
+            border-radius: 50%;
+            background-color: #d98773;
+            color: rgb(0, 0, 0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2vh;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.3s;
+        }
 
         .timerButton:hover {
             background-color: #C03D1F;
@@ -200,14 +215,11 @@ textarea {
      <button class="timerButton" id="changeSound">
       Change Sound
      </button>
-     <button class="timerButton" id="stopwatchDisplay">
+     <button class="timerButton2" id="stopwatchDisplay">
       0:00
      </button>
-     <button class="timerButton" id="stopwatchControl">
-      Start/Stop
-     </button>
      <button class="timerButton" id="stopwatchReset">
-      Reset
+      Reset ST
      </button>
     </div>
     <!-- The timerEndSound plays when the timer reaches 0 -->
@@ -418,8 +430,7 @@ class Stopwatch {
 const stopwatchDisplay = document.getElementById('stopwatchDisplay');
 const stopwatch = new Stopwatch(stopwatchDisplay);
 
-const stopwatchControl = document.getElementById('stopwatchControl');
-stopwatchControl.addEventListener('click', () => stopwatch.startStop());
+stopwatchDisplay.addEventListener('click', () => stopwatch.startStop());
 
 const stopwatchReset = document.getElementById('stopwatchReset');
 stopwatchReset.addEventListener('click', () => stopwatch.reset());
