@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Pomodoro Timer</title>
-    <style>
-        /* The following CSS styles the page to be a vertically and horizontally centered flex container */
+ <head>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Pomodoro Timer
+  </title>
+  <style>
+   /* The following CSS styles the page to be a vertically and horizontally centered flex container */
 body {
             display: flex;
             justify-content: center;
@@ -106,71 +107,117 @@ body {
 textarea {
     font-size: 16px; /* or larger */
 }
-
-
-    </style>
-</head>
-<body>
- <div style="display: flex; flex-direction: column; ">
-        <!-- Add your title field here -->
-        <div style="text-align: center">
-            <label for="title">Title / Wish:</label><br>
-            <input type="text" id="title" onchange="changeTitle()" style="width: 300px"/>
-        </div>
-
-
-     <div style="display: flex; flex-direction: column; Margin-top:2vw">
-        <!-- Add your text field for notes here -->
-        <div style="text-align: center; margin-bottom: 2vw;">
-            <label for="notes" style="display: block; margin-bottom: 1vw;">Notes / Wish:</label>
-            <textarea id="notes" rows="12" cols="35"></textarea>
-        </div>
+  </style>
+ </head>
+ <body>
+  <div style="display: flex; flex-direction: column; ">
+   <!-- Add your title field here -->
+   <div style="text-align: center">
+    <label for="title">
+     Title / Wish:
+    </label>
+    <br/>
+    <input id="title" onchange="changeTitle()" style="width: 300px" type="text"/>
+   </div>
+   <div style="display: flex; flex-direction: column; Margin-top:2vw">
+    <!-- Add your text field for notes here -->
+    <div style="text-align: center; margin-bottom: 2vw;">
+     <label for="notes" style="display: block; margin-bottom: 1vw;">
+      Notes / Wish:
+     </label>
+     <textarea cols="35" id="notes" rows="12"></textarea>
+    </div>
     <!-- Here are the timer circles, each with a data-time attribute specifying its duration in seconds -->
     <div class="timerContainer1">
-	    <div class="timerCircle" data-time="1">0:01</div>
-		<div class="timerCircle" data-time="10">0:10</div>
-		<div class="timerCircle" data-time="30">0:30</div>
-	    <div class="timerCircle" data-time="1200">20:00</div>
-        <div class="timerCircle" data-time="1200">20:00</div>
+     <div class="timerCircle" data-time="1">
+      0:01
+     </div>
+     <div class="timerCircle" data-time="10">
+      0:10
+     </div>
+     <div class="timerCircle" data-time="30">
+      0:30
+     </div>
+     <div class="timerCircle" data-time="1200">
+      20:00
+     </div>
+     <div class="timerCircle" data-time="1200">
+      20:00
+     </div>
     </div>
-	
-	<div class="buttonsContainer1">
-		<button id="btn1" class="timerButton">✔/↻</button>
-		<button id="btn2" class="timerButton">✔/↻</button>
-		<button id="btn3" class="timerButton">✔/↻</button>
-		<button id="btn4" class="timerButton">✔/↻</button>
-		<button id="btn5" class="timerButton">✔/↻</button>
-	</div>
-	
-	<div class="timerContainer2">
-	    <div class="timerCircle" data-time="60">1:00</div>
-        <div class="timerCircle" data-time="180">3:00</div>
-        <div class="timerCircle" data-time="360">6:00</div>
-        <div class="timerCircle" data-time="600">10:00</div>
-        <div class="timerCircle" data-time="1200">20:00</div>
+    <div class="buttonsContainer1">
+     <button class="timerButton" id="btn1">
+      ✔/↻
+     </button>
+     <button class="timerButton" id="btn2">
+      ✔/↻
+     </button>
+     <button class="timerButton" id="btn3">
+      ✔/↻
+     </button>
+     <button class="timerButton" id="btn4">
+      ✔/↻
+     </button>
+     <button class="timerButton" id="btn5">
+      ✔/↻
+     </button>
     </div>
-	
-	<div class="buttonsContainer2">
-     <button id="btn6" class="timerButton">✔/↻</button>
-     <button id="btn7" class="timerButton">✔/↻</button>
-     <button id="btn8" class="timerButton">✔/↻</button>
-	 <button id="btn9" class="timerButton">✔/↻</button>
-	 <button id="btn10" class="timerButton">✔/↻</button>
-	</div>
-
+    <div class="timerContainer2">
+     <div class="timerCircle" data-time="60">
+      1:00
+     </div>
+     <div class="timerCircle" data-time="180">
+      3:00
+     </div>
+     <div class="timerCircle" data-time="360">
+      6:00
+     </div>
+     <div class="timerCircle" data-time="600">
+      10:00
+     </div>
+     <div class="timerCircle" data-time="1200">
+      20:00
+     </div>
+    </div>
+    <div class="buttonsContainer2">
+     <button class="timerButton" id="btn6">
+      ✔/↻
+     </button>
+     <button class="timerButton" id="btn7">
+      ✔/↻
+     </button>
+     <button class="timerButton" id="btn8">
+      ✔/↻
+     </button>
+     <button class="timerButton" id="btn9">
+      ✔/↻
+     </button>
+     <button class="timerButton" id="btn10">
+      ✔/↻
+     </button>
+    </div>
     <div class="buttonsContainer3">
-<button id="changeSound" class="timerButton">Change Sound</button>
-</div>
-
+     <button class="timerButton" id="changeSound">
+      Change Sound
+     </button>
+     <button class="timerButton" id="stopwatchDisplay">
+      0:00
+     </button>
+     <button class="timerButton" id="stopwatchControl">
+      Start/Stop
+     </button>
+     <button class="timerButton" id="stopwatchReset">
+      Reset
+     </button>
+    </div>
     <!-- The timerEndSound plays when the timer reaches 0 -->
-<audio id="timerEndSound" src="rimshot.mp3" preload="auto"></audio>
-
+    <audio id="timerEndSound" preload="auto" src="rimshot.mp3">
+    </audio>
     <!-- The whiteNoise plays continuously while the timer is running -->
-<audio id="whiteNoise" src="bgm_FastTicking.mp3" preload="auto" loop></audio>
-
-<script>
-
-window.onload = function() {
+    <audio id="whiteNoise" loop="" preload="auto" src="bgm_FastTicking.mp3">
+    </audio>
+    <script>
+     window.onload = function() {
     var timerEndSound = document.getElementById('timerEndSound');
     var whiteNoise = document.getElementById('whiteNoise');
 
@@ -314,7 +361,70 @@ document.getElementById('changeSound').addEventListener('click', function() {
     whiteNoise.play();
 });
 
-</script>
 
-</body>
+class Stopwatch {
+    constructor(display) {
+        this.display = display;
+        this.countup = null;
+        this.running = false;
+        this.elapsedTime = 0;
+        this.updateDisplay();
+    }
+
+    startStop() {
+        if (this.countup) {
+            this.stop();
+        } else {
+            this.start();
+        }
+    }
+
+    start() {
+        if (this.countup) return;
+
+        const startTime = Date.now() - this.elapsedTime * 1000;
+        this.countup = setInterval(() => {
+            this.elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+            this.updateDisplay();
+        }, 1000);
+
+        document.getElementById("whiteNoise").play();
+        this.running = true;
+    }
+
+    stop() {
+        if (this.countup) {
+            clearInterval(this.countup);
+            this.countup = null;
+            document.getElementById("whiteNoise").pause();
+        }
+        this.running = false;
+    }
+
+    reset() {
+        this.stop();
+        this.elapsedTime = 0;
+        this.updateDisplay();
+    }
+
+    updateDisplay() {
+        const minutes = Math.floor(this.elapsedTime / 60);
+        const remainderSeconds = this.elapsedTime % 60;
+        const display = `${minutes}:${remainderSeconds < 10 ? '0' : ''}${remainderSeconds}`;
+        this.display.textContent = display;
+    }
+}
+
+const stopwatchDisplay = document.getElementById('stopwatchDisplay');
+const stopwatch = new Stopwatch(stopwatchDisplay);
+
+const stopwatchControl = document.getElementById('stopwatchControl');
+stopwatchControl.addEventListener('click', () => stopwatch.startStop());
+
+const stopwatchReset = document.getElementById('stopwatchReset');
+stopwatchReset.addEventListener('click', () => stopwatch.reset());
+    </script>
+   </div>
+  </div>
+ </body>
 </html>
