@@ -355,7 +355,7 @@ timerButtons.forEach((button, index) => {
 
 // Add this in your JavaScript script
 var sounds = ['bgm_FastTicking.ogg', '31-Ocean-10min.mp3'];
-var currentSound = 0;
+var currentSound = 1;
 
 document.getElementById('changeSound').addEventListener('click', function() {
     var whiteNoise = document.getElementById('whiteNoise');
@@ -369,8 +369,7 @@ document.getElementById('changeSound').addEventListener('click', function() {
     // cycle to the next sound
     currentSound = (currentSound + 1) % sounds.length;
     
-    // Start playing the new sound
-    whiteNoise.play();
+   
 });
 
 
