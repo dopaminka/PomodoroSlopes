@@ -102,7 +102,7 @@ body {
             width: 8vh;
             height: 4vh;
             border-radius: 50%;
-            background-color: #d9a173;
+            background-color: #d97389;
             color: white;
             display: flex;
             justify-content: center;
@@ -116,7 +116,7 @@ body {
             width: 8vh;
             height: 4vh;
             border-radius: 50%;
-            background-color: #d9a173;
+            background-color: #7375d9;
             color: rgb(0, 0, 0);
             display: flex;
             justify-content: center;
@@ -230,17 +230,18 @@ textarea {
     <button class="timerButton2" id="changeSound">
       Change Sound
      </button>
-     <button class="timerButton3" id="stopwatchDisplay">
-      0:00
-     </button>
-     <button class="timerButton2" id="stopwatchReset">
-      Reset ST
-     </button>
      <button class="timerButton2" id="Done">
-        Done
+        Done ✔
         </button>
-    <button class="timerButton2" id="exportBtn">
-    Export time
+        
+     <button class="timerButton3" id="stopwatchDisplay">
+        0:00
+       </button>
+       <button class="timerButton3" id="stopwatchReset">
+        ↻ ST
+     </button>
+    <button class="timerButton3" id="exportBtn">
+    Exp T
     </button>
 
     </div>
@@ -329,6 +330,11 @@ textarea {
     setTimeout(function() {
         document.getElementById("timerEndSound").play();
     }, 100);
+
+        // Add this line to update the stopwatch's elapsed time
+        stopwatch.elapsedTime += this.initialTime;
+        stopwatch.updateDisplay();
+
 }
 
     reset() {
