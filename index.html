@@ -144,7 +144,7 @@ textarea {
    <!-- Add your title field here -->
    <div style="text-align: center">
     <label for="title" id="titleLabel">
-     Title / Wish:
+     Title / Estimation:
     </label>
     <br/>
     <input id="title" onchange="changeTitle()" style="width: 300px" type="text"/>
@@ -153,12 +153,13 @@ textarea {
     <!-- Add your text field for notes here -->
     <div style="text-align: center; margin-bottom: 2vw;">
      <label for="notes" style="display: block; margin-bottom: 1vw;">
-      Notes / Wish:
+      Notes:
      </label>
      <textarea cols="35" id="notes" rows="12"></textarea>
     </div>
     <!-- Here are the timer circles, each with a data-time attribute specifying its duration in seconds -->
     <div class="timerContainer1">
+
      <div class="timerCircle" data-time="1">
       0:01
      </div>
@@ -168,14 +169,12 @@ textarea {
      <div class="timerCircle" data-time="30">
       0:30
      </div>
-     <div class="timerCircle" data-time="1200">
-      20:00
-     </div>
-     <div class="timerCircle" data-time="1200">
-      20:00
-     </div>
+     <button class="timerButton2" id="changeSound">
+        Change Sound
+       </button>
     </div>
     <div class="buttonsContainer1">
+
      <button class="timerButton" id="btn1">
       ✔/↻
      </button>
@@ -185,12 +184,10 @@ textarea {
      <button class="timerButton" id="btn3">
       ✔/↻
      </button>
-     <button class="timerButton" id="btn4">
-      ✔/↻
-     </button>
-     <button class="timerButton" id="btn5">
-      ✔/↻
-     </button>
+     <button class="timerButton2" id="volumeControl">
+        Volume Control
+    </button>
+
     </div>
     <div class="timerContainer2">
      <div class="timerCircle" data-time="60">
@@ -227,13 +224,8 @@ textarea {
      </button>
     </div>
     <div class="buttonsContainer3">
-    <button class="timerButton2" id="changeSound">
-      Change Sound
-     </button>
-     <button class="timerButton2" id="Done">
-        Done ✔
-        </button>
-        
+    
+
      <button class="timerButton3" id="stopwatchDisplay">
         0:00
        </button>
@@ -243,7 +235,9 @@ textarea {
     <button class="timerButton3" id="exportBtn">
     Exp T
     </button>
-
+    <button class="timerButton2" id="Done">
+        Done ✔
+        </button>
     </div>
     <!-- The timerEndSound plays when the timer reaches 0 -->
     <audio id="timerEndSound" preload="auto" src="rimshot.mp3">
@@ -477,7 +471,22 @@ stopwatchDisplay.addEventListener('click', () => stopwatch.startStop());
 
 const stopwatchReset = document.getElementById('stopwatchReset');
 stopwatchReset.addEventListener('click', () => stopwatch.reset());
-    
+
+// Add the volume control code here
+var volumeLevels = [1, 0.20, 0.1, 0];
+var currentVolume = 1;
+
+document.getElementById('volumeControl').addEventListener('click', function() {
+    var timerEndSound = document.getElementById('timerEndSound');
+    var whiteNoise = document.getElementById('whiteNoise');
+
+    // Change the volume level
+    timerEndSound.volume = volumeLevels[currentVolume];
+    whiteNoise.volume = volumeLevels[currentVolume];
+
+    // Cycle to the next volume level
+    currentVolume = (currentVolume + 1) % volumeLevels.length;
+});
     
 function exportToClipboard() {
     // Get the stopwatch display value
