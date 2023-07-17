@@ -98,17 +98,32 @@ body {
             user-select: none;
             transition: background-color 0.3s;
         }
-.timerButton2 {
+        .timerButton2 {
             width: 8vh;
             height: 4vh;
             border-radius: 50%;
-            background-color: #d98773;
+            background-color: #d9a173;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5vh;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.3s;
+        }
+        .timerButton3 {
+            width: 8vh;
+            height: 4vh;
+            border-radius: 50%;
+            background-color: #d9a173;
             color: rgb(0, 0, 0);
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 2vh;
+            font-size: 1.85vh;
             font-weight: bold;
+            letter-spacing: -0.2px;
             cursor: pointer;
             user-select: none;
             transition: background-color 0.3s;
@@ -212,18 +227,22 @@ textarea {
      </button>
     </div>
     <div class="buttonsContainer3">
-    <button class="timerButton" id="changeSound">
+    <button class="timerButton2" id="changeSound">
       Change Sound
      </button>
-     <button class="timerButton2" id="stopwatchDisplay">
+     <button class="timerButton3" id="stopwatchDisplay">
       0:00
      </button>
-     <button class="timerButton" id="stopwatchReset">
+     <button class="timerButton2" id="stopwatchReset">
       Reset ST
      </button>
-     <button class="timerButton" id="Done">
+     <button class="timerButton2" id="Done">
         Done
         </button>
+    <button class="timerButton2" id="exportBtn">
+    Export time
+    </button>
+
     </div>
     <!-- The timerEndSound plays when the timer reaches 0 -->
     <audio id="timerEndSound" preload="auto" src="rimshot.mp3">
@@ -433,12 +452,17 @@ class Stopwatch {
     }
 
     updateDisplay() {
-        const minutes = Math.floor(this.elapsedTime / 60);
-        const remainderSeconds = this.elapsedTime % 60;
-        const display = `${minutes}:${remainderSeconds < 10 ? '0' : ''}${remainderSeconds}`;
-        this.display.textContent = display;
-    }
+    const hours = Math.floor(this.elapsedTime / 3600);
+    const minutes = Math.floor((this.elapsedTime % 3600) / 60);
+    const seconds = this.elapsedTime % 60;
+    const display = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    this.display.textContent = display;
 }
+
+
+}
+
+
 
 const stopwatchDisplay = document.getElementById('stopwatchDisplay');
 const stopwatch = new Stopwatch(stopwatchDisplay);
@@ -447,6 +471,18 @@ stopwatchDisplay.addEventListener('click', () => stopwatch.startStop());
 
 const stopwatchReset = document.getElementById('stopwatchReset');
 stopwatchReset.addEventListener('click', () => stopwatch.reset());
+    
+    
+function exportToClipboard() {
+    // Get the stopwatch display value
+    var stopwatchTime = document.getElementById('stopwatchDisplay').textContent;
+
+    // Copy the stopwatch display value to the clipboard
+    navigator.clipboard.writeText(stopwatchTime);
+    }
+    
+    document.getElementById("exportBtn").addEventListener("click", exportToClipboard);
+displayTopics(); // Initialize the display of the topics
     </script>
    </div>
   </div>
