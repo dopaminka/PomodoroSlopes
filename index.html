@@ -128,7 +128,7 @@ textarea {
   <div style="display: flex; flex-direction: column; ">
    <!-- Add your title field here -->
    <div style="text-align: center">
-    <label for="title">
+    <label for="title" id="titleLabel">
      Title / Wish:
     </label>
     <br/>
@@ -212,7 +212,7 @@ textarea {
      </button>
     </div>
     <div class="buttonsContainer3">
-     <button class="timerButton" id="changeSound">
+    <button class="timerButton" id="changeSound">
       Change Sound
      </button>
      <button class="timerButton2" id="stopwatchDisplay">
@@ -221,6 +221,9 @@ textarea {
      <button class="timerButton" id="stopwatchReset">
       Reset ST
      </button>
+     <button class="timerButton" id="Done">
+        Done
+        </button>
     </div>
     <!-- The timerEndSound plays when the timer reaches 0 -->
     <audio id="timerEndSound" preload="auto" src="rimshot.mp3">
@@ -353,6 +356,15 @@ timerButtons.forEach((button, index) => {
     });
 });
 
+document.getElementById('Done').addEventListener('click', function() {
+    var title = document.getElementById('title').value;
+    document.title = '✔✔✔✔ ' + title + ' is done!';
+
+document.getElementById('titleLabel').textContent = "✔✔✔✔ Done:"
+
+});
+
+
 // Add this in your JavaScript script
 var sounds = ['bgm_FastTicking.ogg', '31-Ocean-10min.mp3'];
 var currentSound = 1;
@@ -369,8 +381,10 @@ document.getElementById('changeSound').addEventListener('click', function() {
     // cycle to the next sound
     currentSound = (currentSound + 1) % sounds.length;
     
-   
+      // Start playing the new sound
+      whiteNoise.play();
 });
+
 
 
 class Stopwatch {
