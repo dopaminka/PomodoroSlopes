@@ -144,7 +144,7 @@ textarea {
    <!-- Add your title field here -->
    <div style="text-align: center">
     <label for="title" id="titleLabel">
-     Title / Estimation:
+     Title | estimation:
     </label>
     <br/>
     <input id="title" onchange="changeTitle()" style="width: 300px" type="text"/>
@@ -153,7 +153,7 @@ textarea {
     <!-- Add your text field for notes here -->
     <div style="text-align: center; margin-bottom: 2vw;">
      <label for="notes" style="display: block; margin-bottom: 1vw;">
-      Notes:
+      Notes | steps:
      </label>
      <textarea cols="35" id="notes" rows="12"></textarea>
     </div>
@@ -473,7 +473,7 @@ const stopwatchReset = document.getElementById('stopwatchReset');
 stopwatchReset.addEventListener('click', () => stopwatch.reset());
 
 // Add the volume control code here
-var volumeLevels = [1, 0.20, 0.1, 0];
+var volumeLevels = [1, 0.20, 0.05, 0];
 var currentVolume = 1;
 
 document.getElementById('volumeControl').addEventListener('click', function() {
